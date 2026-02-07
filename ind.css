@@ -1,0 +1,10 @@
+.menu{
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    align-items: center;
+    margin-left: 30vw;
+}
+
+.menu1{
+    margin-left: 5vw;
+}
