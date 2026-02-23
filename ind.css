@@ -1,10 +1,46 @@
-.menu{
-    font-family: 'Raleway', sans-serif;
-    display: flex;
-    align-items: center;
-    margin-left: 30vw;
+::-webkit-scrollbar{
+    display:  none;
 }
 
-.menu1{
-    margin-left: 5vw;
+.menu{
+    font-family: "Zalando Sans SemiExpanded", sans-serif;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    margin-left: 4vw;
+    margin-top: 4vh;
+    
+    
+}
+
+.menu2{
+    text-align: right;
+    justify-content: end;
+    margin-left: 83vw;
+    margin-right: 4vw;
+}
+
+.titles1{
+    display: block;
+}
+
+.mainTitle1{
+    font-family: "Zalando Sans SemiExpanded", sans-serif;
+    font-weight: 400;
+    font-size: 15vh;
+    text-align: left;
+    margin-left: 4vw;
+    
+    margin-top: 30vh;
+}
+
+.subtitle1{
+    font-family: "Zalando Sans SemiExpanded", sans-serif;
+    font-weight: 200;
+    font-size: medium;
+    margin-left: 80vw;
+    text-align: end;
+    margin-right: 4vw;
+    margin-top: -21vh;
+    
 }
