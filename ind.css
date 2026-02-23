@@ -37,10 +37,67 @@
 .subtitle1{
     font-family: "Zalando Sans SemiExpanded", sans-serif;
     font-weight: 200;
-    font-size: medium;
+    font-size: 2vh;
     margin-left: 80vw;
     text-align: end;
     margin-right: 4vw;
     margin-top: -21vh;
     
+}
+
+
+@media (max-width: 600px) {
+  
+    .menu{
+        font-size: 2.5vw;
+    }
+    .menu2{
+        margin-left: 10vw;
+    }
+  .mainTitle1{
+    font-size: 10vh;
+  }
+  .subtitle1{
+    text-align: left;
+    margin-top: 0;
+    margin-left: 5vw;
+  }
+}
+
+
+@media (max-width: 768px)  and (min-width: 600px){
+  
+    .menu{
+        font-size: 2.5vw;
+    }
+    .menu2{
+        margin-left: 71vw;
+        margin-right: 4vw;
+    }
+  .mainTitle1{
+    font-size: 7vh;
+  }
+  .subtitle1{
+    text-align: left;
+    margin-top: 0vh;
+    margin-left: 5vw;
+  }
+}
+
+@media (min-width: 768px)  and (max-width: 992px){
+  
+    .menu{
+        font-size: 15px;
+    }
+    .menu2{
+        margin-left: 79vw;
+        margin-right: 5vw;
+    }
+  .mainTitle1{
+    font-size: 7vh;
+  }
+  .subtitle1{
+    margin-left: 70vw;
+  }
+  
 }
