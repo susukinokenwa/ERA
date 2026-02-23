@@ -9,15 +9,17 @@
     align-items: center;
     margin-left: 4vw;
     margin-top: 4vh;
-    
+    font-size: 2.5vh;
     
 }
 
 .menu2{
     text-align: right;
     justify-content: end;
+    margin-right: 5vw;
     margin-left: 83vw;
-    margin-right: 4vw;
+    
+    margin-right: 3w;
 }
 
 .titles1{
@@ -71,7 +73,7 @@
         font-size: 2.5vw;
     }
     .menu2{
-        margin-left: 71vw;
+        margin-left: 70vw;
         margin-right: 4vw;
     }
   .mainTitle1{
@@ -81,6 +83,7 @@
     text-align: left;
     margin-top: 0vh;
     margin-left: 5vw;
+    font-size: 20px;
   }
 }
 
@@ -94,10 +97,11 @@
         margin-right: 5vw;
     }
   .mainTitle1{
-    font-size: 7vh;
+    font-size: 10vh;
   }
   .subtitle1{
-    margin-left: 70vw;
+    margin-left: 75vw;
+    margin-top: -5vh;
   }
   
 }
