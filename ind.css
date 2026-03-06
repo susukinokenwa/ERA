@@ -2,33 +2,49 @@
     display:  none;
 }
 
+.body{
+  font-family: "Zalando Sans SemiExpanded", sans-serif;
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
+
 .menu{
     font-family: "Zalando Sans SemiExpanded", sans-serif;
     font-weight: 400;
     display: flex;
     align-items: center;
     margin-left: 4vw;
-    margin-top: 4vh;
+    margin-top: 5vh;
     font-size: 2.5vh;
+    color: white;
+    
     
 }
 
+.menu1{
+    text-align: left;
+  
+    margin-right: 5vw;
+    
+    
+}
 .menu2{
     text-align: right;
     justify-content: end;
     margin-right: 5vw;
-    margin-left: 83vw;
+    margin-left: 78vw;
     
     margin-right: 3w;
 }
 
 .titles1{
     display: block;
+    color: white;
 }
 
 .mainTitle1{
     font-family: "Zalando Sans SemiExpanded", sans-serif;
-    font-weight: 400;
+    font-weight: 450;
     font-size: 15vh;
     text-align: left;
     margin-left: 4vw;
@@ -47,7 +63,54 @@
     
 }
 
+.overVwTitle1{
+  color: white;
+  font-family: "Zalando Sans SemiExpanded", sans-serif;
+  font-weight: 500;
+  text-align: right;
+  margin-right: 4vw;
+  margin-top: 20vh;
+  font-size: 10vh;
+}
 
+.overVwPara{
+  margin-right: 4vw;
+  text-align: right;
+  margin-left: 53vw;
+  margin-bottom: 5vw;
+}
+
+.whyJ{
+  margin: 4vw;
+  margin-top: 4vh;
+}
+
+.whyJH1{
+  margin-top: 20vh;
+  font-size: 10vh;
+  font-weight: 500;
+
+}
+
+.whyJoin{
+  margin-top: 4vw;
+  display: flexbox;
+  font-size: 3vh;
+  font-weight: 80;
+
+}
+
+.whyJEnd{
+  margin-top: 40vh;
+  margin-bottom: 40vh;
+  text-align: center;
+  font-size: 5vh;
+  margin-left: 10vw;
+  margin-right: 10vw;
+
+}
+
+/*
 @media (max-width: 600px) {
   
     .menu{
@@ -105,3 +168,4 @@
   }
   
 }
+  */
