@@ -162,6 +162,7 @@ h1, p {
 .whyJ{
   margin: 4vw;
   margin-top: 4vh;
+  height: 200vh;
 }
 
 .whyJH1{
@@ -181,7 +182,7 @@ h1, p {
 
 .whyJEnd{
   margin-top: 40vh;
-  margin-bottom: 40vh;
+  
   text-align: center;
   font-size: 5vh;
   margin-left: 10vw;
@@ -189,6 +190,30 @@ h1, p {
 
 }
 
+.whyJEbutton{
+  color: white;
+  justify-content: center;
+  display: flex;
+  margin: 5vh;
+  margin-top: 7vh;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 2vh;
+  width: 30vh;
+}
+
+
+.whyJEbutton:hover{
+  background-color: rgb(97, 97, 97);
+    transition-duration: 0.7s;
+}
+
+.timeLineH1{
+  display: flex;
+  justify-content: left ;
+  margin-left: 4%;
+  font-size: 10vh;
+  font-weight: 500;
+}
 /*
 @media (max-width: 600px) {
   
