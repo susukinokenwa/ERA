@@ -142,31 +142,36 @@ h1, p {
   transform: translateY(-50%);
 }
 
+.overView{
+  height: 100vh;
+}
 .overVwTitle1{
   color: white;
   font-family: "Zalando Sans SemiExpanded", sans-serif;
   font-weight: 500;
   text-align: right;
   margin-right: 4vw;
-  margin-top: 20vh;
+  margin-top: 5vh;
   font-size: 10vh;
 }
 
 .overVwPara{
+  margin-top: 5vh;
   margin-right: 4vw;
   text-align: right;
   margin-left: 53vw;
-  margin-bottom: 5vw;
+  font-size: larger;
+  
 }
 
 .whyJ{
-  margin: 4vw;
+  
   margin-top: 4vh;
   height: 200vh;
 }
 
 .whyJH1{
-  margin-top: 20vh;
+  padding-top: 10vh;
   font-size: 10vh;
   font-weight: 500;
 
@@ -180,8 +185,26 @@ h1, p {
 
 }
 
+.whyJoinpart1{
+  background-image: linear-gradient(rgba(0,0,0,0.5),  rgba(0,0,0,0.8)) , url("./image/image.png");
+  background-size: cover;
+ ;height: 100vh;
+ width: 100%;
+ background-position: center;
+ padding: 6vh;
+  
+  }
+
+  .whyJoinpart2{
+    height: 100vh;
+     display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    
+  
+  }
 .whyJEnd{
-  margin-top: 40vh;
   
   text-align: center;
   font-size: 5vh;
