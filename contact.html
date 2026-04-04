@@ -21,7 +21,7 @@
    <nav>
     <a href="./index.html" class="logo">ERA</a>
     <div class="nav-links">
-      <a href="./index.html" class="nav-link">HOME</a>
+  
       <a href="./events.html" class="nav-link">EVENTS</a>
       <a href="./resources.html" class="nav-link">RESOURCES</a>
       <a href="./contact.html" class="nav-link-blue active" style="text-decoration: none;">CONTACT</a>
@@ -98,6 +98,37 @@
       font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
       color: var(--blue); text-decoration: none;
     }
+    @media (max-width: 900px) {
+  .cursor, .cursor-ring { display: none; }
+  body { cursor: auto; }
+  .page-header { padding: 6rem 2rem 3rem; }
+  .resource-section { padding: 3rem 2rem; }
+  .resource-section-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  .resource-section-header p { text-align: left; max-width: 100%; }
+  .file-grid { grid-template-columns: 1fr 1fr; }
+  .file-card:nth-child(3n) { border-right: 1px solid var(--border); padding-right: 2.5rem; }
+  .file-card:nth-child(2n) { border-right: none; padding-right: 0; }
+  .file-card:nth-child(2n+1) { padding-left: 0; }
+  .file-card:nth-child(2n+2) { padding-left: 2.5rem; }
+  .cat-bar { padding: 0 2rem; }
+  .upload-note { padding: 2rem; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+  footer { padding: 1.4rem 2rem; }
+}
+
+@media (max-width: 600px) {
+  nav div { gap: 1.2rem !important; }
+  nav .nav-link, nav .nav-link-blue { font-size: 10px; letter-spacing: 0.1em; }
+  .page-header { padding: 5rem 1.2rem 2.5rem; min-height: unset; }
+  .page-header::before { display: none; }
+  .cat-bar { padding: 0 1.2rem; gap: 0; }
+  .cat-tab { margin-right: 1.5rem; font-size: 10px; }
+  .resource-section { padding: 2.5rem 1.2rem; }
+  .file-grid { grid-template-columns: 1fr; }
+  .file-card { padding: 1.8rem 0 !important; border-right: none !important; }
+  .upload-note { padding: 2rem 1.2rem; flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+  footer { padding: 1.2rem; flex-wrap: wrap; gap: 0.7rem; }
+  .footer-links { flex-wrap: wrap; gap: 1rem; }
+}
 </style>
 </body>
 </html>
