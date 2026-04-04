@@ -569,3 +569,47 @@ footer span {
   width: 100%;
   position: absolute;
 }
+
+
+.era-form {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-row input,
+.form-row textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border-mid);
+  color: var(--white);
+  font-family: "Zalando Sans SemiExpanded", sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  padding: 0.8rem 0;
+  outline: none;
+  transition: border-color 0.2s ease;
+  resize: none;
+}
+
+.form-row input::placeholder,
+.form-row textarea::placeholder {
+  color: var(--muted);
+  letter-spacing: 0.18em;
+  font-size: 11px;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  border-bottom-color: var(--white);
+}
+
+#form-status {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}

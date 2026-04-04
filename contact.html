@@ -10,6 +10,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
 <script type="module" src="https://unpkg.com/@splinetool/viewer@1.0.87/build/spline-viewer.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init({ publicKey: "HUE6z3fz7rNqvsOFm" });
+</script>
 </head>
 <body>
      <div class="cursor" id="cursor"></div>
@@ -20,31 +24,53 @@
        
     </div>
     </nav>
-    <!-- CONTACT -->
-    <section id="contact">
+   <section id="contact">
   <p class="section-index reveal">03 — Contact</p>
-  <h2 class="reveal" style="width: 40%;">Get in<br>touch</h2>
+  <h2 class="reveal">Get in<br><span style="color: rgb(0, 110, 255);">touch</span></h2>
+
   <div class="contact-layout">
-    <div class="contact-grid">
-      <div class="contact-item reveal">
-        <div class="contact-platform">Email</div>
-        <a href="mailto:erallianceinfo@gmail.com" class="contact-value">erallianceinfo@gmail.com</a>
+    <div class="contact-left">
+
+      <!-- static links -->
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="contact-platform">Email</div>
+          <a href="mailto:erallianceinfo@gmail.com" class="contact-value">erallianceinfo@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-platform">Instagram</div>
+          <a href="https://instagram.com/_era_central" class="contact-value" target="_blank">@_era_central</a>
+        </div>
+        <div class="contact-item">
+          <div class="contact-platform">Discord</div>
+          <a href="YOUR_DISCORD_LINK" class="contact-value" target="_blank">ERA Robotics Competition</a>
+        </div>
       </div>
-      <div class="contact-item reveal" style="transition-delay:0.05s">
-        <div class="contact-platform">Instagram</div>
-        <a href="https://instagram.com/_era_central" class="contact-value" target="_blank">@_era_central</a>
-      </div>
-      <div class="contact-item reveal" style="transition-delay:0.1s">
-        <div class="contact-platform">Discord</div>
-        <a href="YOUR_DISCORD_LINK" class="contact-value" target="_blank">ERA Robotics Competition</a>
-      </div>
+
+      <!-- contact form -->
+      <form id="contact-form" class="era-form">
+        <div class="form-row">
+          <input type="text" name="from_name" placeholder="YOUR NAME" required />
+        </div>
+        <div class="form-row">
+          <input type="email" name="from_email" placeholder="YOUR EMAIL" required />
+        </div>
+        <div class="form-row">
+          <textarea name="message" rows="5" placeholder="YOUR MESSAGE" required></textarea>
+        </div>
+        <button type="submit" class="btn" id="submit-btn" style="color: black">SEND MESSAGE →</button>
+        <p id="form-status"></p>
+      </form>
+
     </div>
-    <div class="contact-spline" style="margin-top: -20vh;">
-      <spline-viewer class="logo" url="https://prod.spline.design/w1coSZeUGOYPw49H/scene.splinecode"></spline-viewer>
+
+    <div class="contact-spline">
+      <spline-viewer url="https://prod.spline.design/w1coSZeUGOYPw49H/scene.splinecode"></spline-viewer>
     </div>
   </div>
 </section>
    
+</section>
     <link rel="stylesheet" href="./ind.css">
     <script src="./main.js"></script>
 

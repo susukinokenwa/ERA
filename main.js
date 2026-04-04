@@ -20,3 +20,27 @@
         entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.15 });
     reveals.forEach(r => observer.observe(r));
+
+
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const btn = document.getElementById('submit-btn');
+  const status = document.getElementById('form-status');
+
+  btn.textContent = 'SENDING...';
+
+  emailjs.sendForm('service_b8by1rd', 'template_jpe45h4', this)
+    .then(() => {
+      status.textContent = 'Message sent successfully.';
+      status.style.color = '#7fff7f';
+      btn.textContent = 'SENT ✓';
+      this.reset();
+    })
+    .catch((error) => {
+      status.textContent = 'Something went wrong. Try emailing directly.';
+      status.style.color = '#ff6b6b';
+      btn.textContent = 'SEND MESSAGE →';
+      console.error(error);
+    });
+});
