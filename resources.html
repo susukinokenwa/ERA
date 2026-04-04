@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERA — Resources</title>
+  <link rel="icon" type="image/png" href="./logo/f.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --white: #f5f4f0;
+      --black: #000000;
+      --muted: #555550;
+      --border: rgba(245, 244, 240, 0.12);
+      --border-mid: rgba(245, 244, 240, 0.2);
+      --blue: rgb(0, 110, 225);
+    }
+
+    html { scrollbar-width: none; overflow-y: scroll; }
+    html::-webkit-scrollbar { display: none; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Zalando Sans SemiExpanded", sans-serif;
+      font-weight: 300;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--white); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(245,244,240,0.4); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transition: transform 0.08s ease;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 2.5rem;
+    }
+    nav .logo {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.22em;
+      color: var(--white); text-decoration: none;
+    }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    nav .nav-link {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
+      color: rgba(245,244,240,0.5); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    nav .nav-link:hover { color: var(--white); }
+    nav .nav-link.active { color: var(--white); }
+    nav .nav-link-blue {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
+      color: var(--blue); text-decoration: none;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      min-height: 55vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 8rem 4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: 'DOCS';
+      position: absolute;
+      right: 2rem; top: 50%; transform: translateY(-50%);
+      font-size: clamp(8rem, 20vw, 22rem);
+      font-weight: 700; letter-spacing: -0.05em;
+      color: rgba(245,244,240,0.03);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+    .page-header .section-index {
+      font-size: 11px; letter-spacing: 0.2em; color: var(--muted);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both 0.1s;
+    }
+    .page-header h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700; line-height: 0.92; letter-spacing: -0.03em;
+      animation: fadeUp 0.8s ease both 0.25s;
+    }
+    .page-header h1 span { color: var(--blue); }
+    .page-header .header-sub {
+      font-size: 13px; font-weight: 300;
+      color: rgba(245,244,240,0.45); margin-top: 1.5rem;
+      max-width: 420px; line-height: 1.7;
+      animation: fadeUp 0.8s ease both 0.4s;
+    }
+
+    /* CATEGORY TABS */
+    .cat-bar {
+      display: flex; border-bottom: 1px solid var(--border);
+      padding: 0 4rem;
+      overflow-x: auto;
+    }
+    .cat-tab {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--muted); padding: 1.2rem 0;
+      margin-right: 3rem; cursor: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .cat-tab.active { color: var(--white); border-bottom-color: var(--white); }
+    .cat-tab:hover { color: var(--white); }
+
+    /* RESOURCE SECTIONS */
+    .resource-section {
+      border-bottom: 1px solid var(--border);
+      padding: 4rem;
+    }
+    .resource-section-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .resource-section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700; letter-spacing: -0.03em; line-height: 1;
+    }
+    .resource-section-header p {
+      font-size: 13px; font-weight: 300;
+      color: rgba(245,244,240,0.5); max-width: 320px;
+      line-height: 1.7; text-align: right;
+    }
+
+    /* FILE GRID */
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .file-card {
+      padding: 2.5rem 2.5rem 2.5rem 0;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transition: background 0.2s;
+      text-decoration: none; color: inherit;
+    }
+    .file-card:nth-child(3n) { border-right: none; padding-right: 0; }
+    .file-card:nth-child(3n+2) { padding-left: 2.5rem; }
+    .file-card:nth-child(3n+3) { padding-left: 2.5rem; }
+    .file-card:hover { background: rgba(245,244,240,0.02); }
+
+    .file-type-badge {
+      display: inline-block; align-self: flex-start;
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border: 1px solid var(--border-mid);
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+    .file-type-badge.pdf { border-color: rgba(255,100,100,0.3); color: rgba(255,130,130,0.8); }
+    .file-type-badge.pptx { border-color: rgba(255,165,0,0.3); color: rgba(255,165,0,0.8); }
+    .file-type-badge.docx { border-color: rgba(0,110,225,0.4); color: rgba(80,150,255,0.9); }
+    .file-type-badge.link { border-color: rgba(127,255,127,0.3); color: rgba(127,255,127,0.8); }
+
+    .file-name {
+      font-size: 16px; font-weight: 500; letter-spacing: -0.01em;
+      line-height: 1.3; margin-bottom: 0.7rem;
+      flex: 1;
+    }
+    .file-desc {
+      font-size: 12px; font-weight: 300;
+      color: rgba(245,244,240,0.45); line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    .file-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .file-updated { font-size: 10px; letter-spacing: 0.12em; color: var(--muted); }
+    .file-download {
+      font-size: 11px; letter-spacing: 0.14em; color: rgba(245,244,240,0.4);
+      transition: color 0.2s;
+    }
+    .file-card:hover .file-download { color: var(--white); }
+
+    /* EMPTY SLOT */
+    .file-card.empty {
+      border: 1px dashed rgba(245,244,240,0.07);
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 180px;
+    }
+    .file-card.empty span {
+      font-size: 11px; letter-spacing: 0.2em; color: rgba(245,244,240,0.15);
+      text-transform: uppercase;
+    }
+
+    /* UPLOAD CTA */
+    .upload-note {
+      padding: 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .upload-note p {
+      font-size: 13px; font-weight: 300;
+      color: rgba(245,244,240,0.5); max-width: 500px; line-height: 1.7;
+    }
+    .btn {
+      display: inline-block;
+      font-family: "Zalando Sans SemiExpanded", sans-serif;
+      font-size: 11px; font-weight: 400; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--white);
+      text-decoration: none; padding: 0.9rem 2.4rem;
+      border: 1px solid rgba(245,244,240,0.3);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: none; white-space: nowrap;
+    }
+    .btn:hover { background: rgba(245,244,240,0.06); border-color: rgba(245,244,240,0.6); }
+
+    footer {
+      padding: 1.4rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    footer span { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-link { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: var(--white); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <nav>
+    <a href="./index.html" class="logo">ERA</a>
+    <div class="nav-links">
+      <a href="./index.html" class="nav-link">HOME</a>
+      <a href="./events.html" class="nav-link">EVENTS</a>
+      <a href="./resources.html" class="nav-link active">RESOURCES</a>
+      <a href="./contact.html" class="nav-link-blue">CONTACT</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <p class="section-index">ERA — RESOURCES</p>
+    <h1>Rules &<br><span>Documents</span></h1>
+    <p class="header-sub">Official rulesets, competition guides, starter systems, and invitation documents for ERA member clubs.</p>
+  </div>
+
+  <div class="cat-bar">
+    <span class="cat-tab active">All</span>
+    <span class="cat-tab">Rules</span>
+    <span class="cat-tab">Competition</span>
+    <span class="cat-tab">Onboarding</span>
+    <span class="cat-tab">Templates</span>
+  </div>
+
+  <!-- COMPETITION RULES -->
+  <div class="resource-section reveal">
+    <div class="resource-section-header">
+      <h2>Competition<br>Rules</h2>
+      <p>Official rulesets governing ERA combat robotics events. All competing teams must review before registering.</p>
+    </div>
+    <div class="file-grid">
+      <a href="#" class="file-card">
+        <span class="file-type-badge pdf">PDF</span>
+        <div class="file-name">ERA 1.0 Official Ruleset</div>
+        <div class="file-desc">Complete rules for the 1lb antweight combat class. Covers robot construction, safety, match format, and scoring.</div>
+        <div class="file-footer">
+          <span class="file-updated">Updated Apr 2026</span>
+          <span class="file-download">Download ↓</span>
+        </div>
+      </a>
+      <a href="#" class="file-card">
+        <span class="file-type-badge pdf">PDF</span>
+        <div class="file-name">Starter System Guide</div>
+        <div class="file-desc">Recommended beginner robot system for first-time builders. Parts list, wiring diagram, and assembly tips included.</div>
+        <div class="file-footer">
+          <span class="file-updated">Updated Mar 2026</span>
+          <span class="file-download">Download ↓</span>
+        </div>
+      </a>
+      <div class="file-card empty">
+        <span>Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ONBOARDING -->
+  <div class="resource-section reveal">
+    <div class="resource-section-header">
+      <h2>Onboarding &<br>Invitations</h2>
+      <p>Documents for clubs joining ERA. Share these with your institution's leadership or engineering faculty.</p>
+    </div>
+    <div class="file-grid">
+      <a href="#" class="file-card">
+        <span class="file-type-badge pptx">PPTX</span>
+        <div class="file-name">ERA Overview Deck</div>
+        <div class="file-desc">Presentation introducing ERA to new clubs and institutions. Covers mission, structure, seasons, and how to join.</div>
+        <div class="file-footer">
+          <span class="file-updated">Updated Feb 2026</span>
+          <span class="file-download">Download ↓</span>
+        </div>
+      </a>
+      <a href="#" class="file-card">
+        <span class="file-type-badge docx">DOCX</span>
+        <div class="file-name">Club Invitation Letter</div>
+        <div class="file-desc">Formal invitation template for reaching out to engineering clubs at other institutions.</div>
+        <div class="file-footer">
+          <span class="file-updated">Updated Feb 2026</span>
+          <span class="file-download">Download ↓</span>
+        </div>
+      </a>
+      <a href="#" class="file-card">
+        <span class="file-type-badge docx">DOCX</span>
+        <div class="file-name">Faculty Sign-Off Template</div>
+        <div class="file-desc">One-page document for obtaining institutional approval to participate in ERA competitions.</div>
+        <div class="file-footer">
+          <span class="file-updated">Updated Feb 2026</span>
+          <span class="file-download">Download ↓</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- TECHNICAL -->
+  <div class="resource-section reveal">
+    <div class="resource-section-header">
+      <h2>Technical<br>Resources</h2>
+      <p>CAD files, wiring diagrams, and component guides to help teams build competitive robots.</p>
+    </div>
+    <div class="file-grid">
+      <div class="file-card empty">
+        <span>Coming Soon</span>
+      </div>
+      <div class="file-card empty">
+        <span>Coming Soon</span>
+      </div>
+      <div class="file-card empty">
+        <span>Coming Soon</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-note reveal">
+    <p>Can't find what you're looking for, or want to submit a resource for review? Reach out to the ERA team and we'll get it added.</p>
+    <a href="./contact.html" class="btn">Contact ERA →</a>
+  </div>
+
+  <footer>
+    <span>EMAMI ROBOTICS ALLIANCE</span>
+    <div class="footer-links">
+      <a href="./index.html" class="footer-link">Home</a>
+      <a href="./events.html" class="footer-link">Events</a>
+      <a href="./contact.html" class="footer-link">Contact</a>
+      <span style="font-size:11px;letter-spacing:0.15em;color:rgb(0,110,225);">2026 All Rights Reserved</span>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+    });
+    function animRing() {
+      rx += (mx - rx - 16) * 0.12;
+      ry += (my - ry - 16) * 0.12;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>

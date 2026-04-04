@@ -500,6 +500,7 @@ footer span {
   justify-content: left;
   letter-spacing: 0.15em;
   font-size: 11px;
+  padding-top: 1rem;
 }
 
 
@@ -612,4 +613,103 @@ footer span {
   font-size: 12px;
   letter-spacing: 0.1em;
   margin-top: 0.5rem;
+}
+
+/* EXPLORE */
+#explore {
+  justify-content: flex-start;
+  padding-top: 8rem;
+}
+#explore .section-index {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  margin-bottom: 2rem;
+}
+#explore h2 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  margin-bottom: 3.5rem;
+}
+.explore-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--border);
+  width: 100%;
+}
+.explore-card {
+  padding: 2.5rem 2.5rem 2.5rem 0;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-decoration: none;
+  color: var(--white);
+  transition: background 0.25s ease;
+  cursor: none;
+}
+.explore-card:last-child {
+  border-right: none;
+  padding-left: 2.5rem;
+  padding-right: 0;
+}
+.explore-card:hover {
+  background: rgba(245,244,240,0.02);
+}
+.explore-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.explore-tag {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.explore-arrow {
+  font-size: 18px;
+  color: rgba(245,244,240,0.2);
+  transition: color 0.2s ease, transform 0.2s ease;
+  display: inline-block;
+}
+.explore-card:hover .explore-arrow {
+  color: var(--white);
+  transform: translate(3px, -3px);
+}
+.explore-card-body {
+  flex: 1;
+}
+.explore-card-title {
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 1rem;
+}
+.explore-card-sub {
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(245,244,240,0.45);
+  line-height: 1.7;
+}
+.explore-card-footer {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.explore-status {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.8rem;
+  border: 1px solid rgba(127,255,127,0.35);
+  color: #7fff7f;
+}
+.explore-status.docs {
+  border-color: var(--blue);
+  color: var(--blue);
+  letter-spacing: 0.12em;
 }

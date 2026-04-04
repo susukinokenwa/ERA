@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERA robotics</title>
-    <link rel="icon" type="image/png" href="./logo/2026_02_17_0qa_Kleki.png">
+    <link rel="icon" type="image/png" href="./logo/f.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
@@ -18,15 +18,18 @@
 <body>
      <div class="cursor" id="cursor"></div>
     <div class="cursor-ring" id="cursor-ring"></div>
-    <nav>
-        <a href="./index.html" class="logo">ERA</a>
-    <div style="display:flex;gap:2rem;align-items:center;">
-       
+   <nav>
+    <a href="./index.html" class="logo">ERA</a>
+    <div class="nav-links">
+      <a href="./index.html" class="nav-link">HOME</a>
+      <a href="./events.html" class="nav-link">EVENTS</a>
+      <a href="./resources.html" class="nav-link">RESOURCES</a>
+      <a href="./contact.html" class="nav-link-blue active" style="text-decoration: none;">CONTACT</a>
     </div>
-    </nav>
+  </nav>
    <section id="contact">
   <p class="section-index reveal">03 — Contact</p>
-  <h2 class="reveal">Get in<br><span style="color: rgb(0, 110, 255);">touch</span></h2>
+  <h2 class="reveal">Get in<br><span style="color: rgb(255, 255, 255);">touch</span></h2>
 
   <div class="contact-layout">
     <div class="contact-left">
@@ -73,6 +76,28 @@
 </section>
     <link rel="stylesheet" href="./ind.css">
     <script src="./main.js"></script>
-
+<style>
+   nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 2.5rem;
+    }
+    nav .logo {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.22em;
+      color: var(--white); text-decoration: none;
+    }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    nav .nav-link {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
+      color: rgba(245,244,240,0.5); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    nav .nav-link:hover { color: var(--white); }
+    nav .nav-link.active { color: var(--white); }
+    nav .nav-link-blue {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
+      color: var(--blue); text-decoration: none;
+    }
+</style>
 </body>
 </html>

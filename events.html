@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERA — Events</title>
+  <link rel="icon" type="image/png" href="./logo/f.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zalando+Sans+SemiExpanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --white: #f5f4f0;
+      --black: #000000;
+      --muted: #555550;
+      --border: rgba(245, 244, 240, 0.12);
+      --border-mid: rgba(245, 244, 240, 0.2);
+      --blue: rgb(0, 110, 225);
+    }
+
+    html { scrollbar-width: none; overflow-y: scroll; }
+    html::-webkit-scrollbar { display: none; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Zalando Sans SemiExpanded", sans-serif;
+      font-weight: 300;
+      cursor: none;
+    }
+
+    .cursor {
+      width: 8px; height: 8px;
+      background: var(--white); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+    }
+    .cursor-ring {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(245,244,240,0.4); border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transition: transform 0.08s ease;
+    }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 2.5rem;
+    }
+    nav .logo {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.22em;
+      color: var(--white); text-decoration: none;
+    }
+    nav .nav-links { display: flex; gap: 2rem; align-items: center; }
+    nav .nav-link {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
+      color: rgba(245,244,240,0.5); text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    nav .nav-link:hover { color: var(--white); }
+    nav .nav-link.active { color: var(--white); }
+    nav .nav-link-blue {
+      font-size: 12px; font-weight: 400; letter-spacing: 0.18em;
+      color: var(--blue); text-decoration: none;
+    }
+
+    /* PAGE HEADER */
+    .page-header {
+      min-height: 55vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 8rem 4rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: 'EVENTS';
+      position: absolute;
+      right: 3rem; top: 50%; transform: translateY(-50%);
+      font-size: clamp(8rem, 18vw, 20rem);
+      font-weight: 700; letter-spacing: -0.05em;
+      color: rgba(245,244,240,0.03);
+      pointer-events: none; user-select: none;
+      line-height: 1;
+    }
+    .page-header .section-index {
+      font-size: 11px; letter-spacing: 0.2em; color: var(--muted);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.8s ease both 0.1s;
+    }
+    .page-header h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 700; line-height: 0.92; letter-spacing: -0.03em;
+      animation: fadeUp 0.8s ease both 0.25s;
+    }
+    .page-header h1 span { color: var(--blue); }
+    .page-header .header-sub {
+      font-size: 13px; font-weight: 300;
+      color: rgba(245,244,240,0.45); margin-top: 1.5rem;
+      max-width: 400px; line-height: 1.7;
+      animation: fadeUp 0.8s ease both 0.4s;
+    }
+
+    /* EVENT CARD HERO */
+    .event-hero {
+      padding: 5rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .event-tag-row {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+    .event-tag {
+      font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(127,255,127,0.4);
+      color: #7fff7f;
+    }
+    .event-tag.upcoming {
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .event-number {
+      font-size: 11px; letter-spacing: 0.2em; color: var(--muted);
+    }
+
+    .event-title {
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      font-weight: 700; line-height: 1; letter-spacing: -0.03em;
+      margin-bottom: 0.5rem;
+    }
+    .event-subtitle {
+      font-size: clamp(1rem, 2vw, 1.4rem);
+      font-weight: 300; color: var(--blue);
+      letter-spacing: 0.05em; margin-bottom: 3rem;
+    }
+
+    .event-meta-bar {
+      display: grid; grid-template-columns: repeat(3, auto) 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 4rem;
+    }
+    .meta-item {
+      padding: 1.4rem 2rem 1.4rem 0;
+      border-right: 1px solid var(--border);
+      margin-right: 2rem;
+    }
+    .meta-item:last-child { border-right: none; margin-right: 0; }
+    .meta-label {
+      font-size: 10px; letter-spacing: 0.2em; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 0.4rem;
+    }
+    .meta-value {
+      font-size: 14px; font-weight: 500; letter-spacing: -0.01em;
+      line-height: 1.4;
+    }
+
+    /* CONTENT GRID */
+    .event-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .event-col {
+      padding: 3rem 4rem 3rem 0;
+      border-right: 1px solid var(--border);
+    }
+    .event-col:last-child {
+      border-right: none;
+      padding-left: 4rem; padding-right: 0;
+    }
+
+    .col-heading {
+      font-size: 10px; letter-spacing: 0.22em; color: var(--muted);
+      text-transform: uppercase; margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* SCHEDULE */
+    .schedule-list { display: flex; flex-direction: column; }
+    .schedule-row {
+      display: grid; grid-template-columns: 90px 1fr;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1.5rem; align-items: baseline;
+    }
+    .schedule-row:last-child { border-bottom: none; }
+    .sched-time {
+      font-size: 11px; letter-spacing: 0.12em;
+      color: var(--muted); font-weight: 400;
+      font-variant-numeric: tabular-nums;
+    }
+    .sched-event {
+      font-size: 14px; font-weight: 400; line-height: 1.4;
+    }
+    .sched-event.highlight { color: var(--blue); font-weight: 500; }
+
+    /* REGISTRATION */
+    .reg-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .reg-item:last-of-type { border-bottom: none; }
+    .reg-type { font-size: 14px; font-weight: 400; }
+    .reg-price {
+      font-size: 20px; font-weight: 700; letter-spacing: -0.03em;
+    }
+    .reg-price.free { color: #7fff7f; }
+    .reg-price.paid { color: var(--white); }
+
+    .reg-note {
+      font-size: 12px; font-weight: 300;
+      color: rgba(245,244,240,0.4); line-height: 1.7;
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* RESOURCES STRIP */
+    .resources-strip {
+      margin-top: 2rem; padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .resources-strip .col-heading { margin-bottom: 1.2rem; }
+    .resource-links { display: flex; flex-direction: column; gap: 0; }
+    .resource-link {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--white);
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s ease;
+    }
+    .resource-link:hover { color: var(--blue); }
+    .resource-link:last-child { border-bottom: none; }
+    .resource-link-arrow { font-size: 12px; color: var(--muted); transition: color 0.2s; }
+    .resource-link:hover .resource-link-arrow { color: var(--blue); }
+
+    /* FOOD BANNER */
+    .food-banner {
+      padding: 3rem 4rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .food-text { font-size: 14px; font-weight: 300; color: rgba(245,244,240,0.6); line-height: 1.7; max-width: 500px; }
+    .food-label { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+
+    /* CTA */
+    .event-cta {
+      padding: 5rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .event-cta p {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 700; letter-spacing: -0.02em; line-height: 1.2;
+      max-width: 500px;
+    }
+    .event-cta p span { color: rgba(245,244,240,0.25); }
+    .btn {
+      display: inline-block;
+      font-family: "Zalando Sans SemiExpanded", sans-serif;
+      font-size: 11px; font-weight: 400; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--white);
+      text-decoration: none; padding: 0.9rem 2.4rem;
+      border: 1px solid rgba(245,244,240,0.3);
+      transition: background 0.2s, border-color 0.2s;
+      cursor: none; white-space: nowrap;
+    }
+    .btn:hover { background: rgba(245,244,240,0.06); border-color: rgba(245,244,240,0.6); }
+    .btn-blue {
+      border-color: var(--blue); color: var(--blue);
+    }
+    .btn-blue:hover { background: rgba(0,110,225,0.08); border-color: var(--blue); }
+
+    footer {
+      padding: 1.4rem 4rem;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    footer span { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-link { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-link:hover { color: var(--white); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursor-ring"></div>
+
+  <nav>
+    <a href="./index.html" class="logo">ERA</a>
+    <div class="nav-links">
+      <a href="./index.html" class="nav-link">HOME</a>
+      <a href="./events.html" class="nav-link active">EVENTS</a>
+      <a href="./resources.html" class="nav-link">RESOURCES</a>
+      <a href="./contact.html" class="nav-link-blue">CONTACT</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <p class="section-index">ERA — EVENTS</p>
+    <h1>Upcoming<br><span>Events</span></h1>
+    <p class="header-sub">Combat robotics competitions, qualifiers, and intercollegiate events.</p>
+  </div>
+
+  <!-- EVENT 01 -->
+  <div class="event-hero reveal">
+    <div class="event-tag-row">
+      <span class="event-tag upcoming">Registration Open</span>
+      <span class="event-number">EVENT 01 / 2026</span>
+    </div>
+    <h2 class="event-title">ERA 1.0</h2>
+    <p class="event-subtitle">1lb Combat Robotics Event</p>
+
+    <div class="event-meta-bar">
+      <div class="meta-item">
+        <div class="meta-label">Date</div>
+        <div class="meta-value">May 15th, 2026</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Time</div>
+        <div class="meta-value">10:00 AM – 4:00 PM</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-label">Location</div>
+        <div class="meta-value">De Anza College MLC<br><span style="font-weight:300;color:rgba(245,244,240,0.5);font-size:12px;">21250 Stevens Creek Blvd, Cupertino, CA</span></div>
+      </div>
+      <div class="meta-item"></div>
+    </div>
+
+    <div class="event-content">
+
+      <!-- LEFT COL: Schedule + Resources -->
+      <div class="event-col">
+        <p class="col-heading">Schedule</p>
+        <div class="schedule-list">
+          <div class="schedule-row">
+            <span class="sched-time">10:00 AM</span>
+            <span class="sched-event">Pits open</span>
+          </div>
+          <div class="schedule-row">
+            <span class="sched-time">10:30 AM</span>
+            <span class="sched-event">Safety check-in</span>
+          </div>
+          <div class="schedule-row">
+            <span class="sched-time">11:00 AM</span>
+            <span class="sched-event">Estimated event start <span style="color:var(--muted);font-size:12px;">(please be flexible)</span></span>
+          </div>
+          <div class="schedule-row">
+            <span class="sched-time">3:40 PM</span>
+            <span class="sched-event highlight">Awards Ceremony</span>
+          </div>
+        </div>
+
+        <div class="resources-strip reveal" style="transition-delay:0.1s">
+          <p class="col-heading">Event Resources</p>
+          <div class="resource-links">
+            <a href="#" class="resource-link">
+              <span>Rules PDF</span>
+              <span class="resource-link-arrow">↗</span>
+            </a>
+            <a href="#" class="resource-link">
+              <span>Starter System PDF</span>
+              <span class="resource-link-arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT COL: Registration -->
+      <div class="event-col reveal" style="transition-delay:0.15s">
+        <p class="col-heading">Registration</p>
+
+        <div class="reg-item">
+          <div>
+            <div class="reg-type">High School Teams</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">Per team entry</div>
+          </div>
+          <div class="reg-price paid">$30</div>
+        </div>
+        <div class="reg-item">
+          <div>
+            <div class="reg-type">College / University</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:3px;">All college teams</div>
+          </div>
+          <div class="reg-price free">FREE</div>
+        </div>
+
+        <p class="reg-note">Registration fees help cover arena rentals and trailer logistics. Prizes to be announced.</p>
+
+        <div style="margin-top:2rem;padding-top:2rem;border-top:1px solid var(--border);">
+          <p class="col-heading">Food & Refreshments</p>
+          <p style="font-size:13px;font-weight:300;color:rgba(245,244,240,0.6);line-height:1.8;">
+            Snacks and drinks will be provided for all teams and attendees. Come hang out with fellow builders, show off your robot, and enjoy a full day of combat robotics.
+          </p>
+        </div>
+        <!---->
+        <div style="margin-top:2rem;">
+          <a href="./contact.html" class="btn btn-blue">Contact to Register →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="event-cta reveal">
+    <p>Can't make it? <span>Stay updated on future ERA events and seasons.</span></p>
+    <a href="./contact.html" class="btn">Get Notified →</a>
+  </div>
+
+  <footer>
+    <span>EMAMI ROBOTICS ALLIANCE</span>
+    <div class="footer-links">
+      <a href="./index.html" class="footer-link">Home</a>
+      <a href="./resources.html" class="footer-link">Resources</a>
+      <a href="./contact.html" class="footer-link">Contact</a>
+      <span style="font-size:11px;letter-spacing:0.15em;color:rgb(0,110,225);">2026 All Rights Reserved</span>
+    </div>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+    });
+    function animRing() {
+      rx += (mx - rx - 16) * 0.12;
+      ry += (my - ry - 16) * 0.12;
+      ring.style.transform = `translate(${rx}px, ${ry}px)`;
+      requestAnimationFrame(animRing);
+    }
+    animRing();
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    reveals.forEach(r => observer.observe(r));
+  </script>
+</body>
+</html>
