@@ -248,6 +248,18 @@
     .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
+
+
+    .cat-tab {
+  cursor: none;
+  user-select: none;
+}
+.resource-section {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+
       @media (max-width: 900px) {
   .cursor, .cursor-ring { display: none; }
   body { cursor: auto; }
@@ -305,15 +317,15 @@
   </div>
 
   <div class="cat-bar">
-    <span class="cat-tab active">All</span>
-    <span class="cat-tab">Rules</span>
-    <span class="cat-tab">Competition</span>
-    <span class="cat-tab">Onboarding</span>
-    <span class="cat-tab">Templates</span>
-  </div>
+  <span class="cat-tab active" data-filter="all">All</span>
+  <span class="cat-tab" data-filter="rules">Rules</span>
+  <span class="cat-tab" data-filter="competition">Competition</span>
+  <span class="cat-tab" data-filter="onboarding">Onboarding</span>
+  <span class="cat-tab" data-filter="templates">Templates</span>
+</div>
 
   <!-- COMPETITION RULES -->
-  <div class="resource-section reveal">
+  <div class="resource-section reveal" data-category="rules competition">
     <div class="resource-section-header">
       <h2>Competition<br>Rules</h2>
       <p>Official rulesets governing ERA combat robotics events. All competing teams must review before registering.</p>
@@ -344,7 +356,7 @@
   </div>
 
   <!-- ONBOARDING -->
-  <div class="resource-section reveal">
+  <div class="resource-section reveal" data-category="onboarding templates">
     <div class="resource-section-header">
       <h2>Onboarding &<br>Invitations</h2>
       <p>Documents for clubs joining ERA. Share these with your institution's leadership or engineering faculty.</p>
@@ -381,7 +393,7 @@
   </div>
 
   <!-- TECHNICAL -->
-  <div class="resource-section reveal">
+  <div class="resource-section reveal" data-category="competition">
     <div class="resource-section-header">
       <h2>Technical<br>Resources</h2>
       <p>CAD files, wiring diagrams, and component guides to help teams build competitive robots.</p>
@@ -434,6 +446,35 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(r => observer.observe(r));
+
+
+
+    
+const tabs = document.querySelectorAll('.cat-tab');
+const sections = document.querySelectorAll('.resource-section');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const filter = tab.dataset.filter;
+
+    // update active tab
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+
+    // show/hide sections
+    sections.forEach(section => {
+      const cats = section.dataset.category || '';
+      if (filter === 'all' || cats.includes(filter)) {
+        section.style.display = 'block';
+        // re-trigger reveal animation
+        section.classList.remove('visible');
+        setTimeout(() => section.classList.add('visible'), 50);
+      } else {
+        section.style.display = 'none';
+      }
+    });
+  });
+});
   </script>
 </body>
 </html>
