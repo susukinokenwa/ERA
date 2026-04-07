@@ -169,9 +169,9 @@ section {
 #hero .scroll-hint {
   position: absolute;
   bottom: 2.5rem;
-  right: 2.5rem;
+  right: 0rem;
   z-index: 2;
-  font-size: 11px;
+  font-size: 80px;
   letter-spacing: 0.18em;
   color: rgba(245,244,240,0.3);
   writing-mode: vertical-rl;
@@ -483,14 +483,13 @@ section {
 /* FOOTER — was width: 20%, broken on mobile */
 footer {
       padding: 1.4rem 4rem;
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between; align-items: right;
       border-top: 1px solid var(--border);
     }
     footer span { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); }
     .footer-links { display: flex; gap: 2rem; }
     .footer-link { font-size: 11px; letter-spacing: 0.15em; color: var(--muted); text-decoration: none; transition: color 0.2s; }
     .footer-link:hover { color: var(--white); }
-
 
 /* ANIMATIONS */
 @keyframes fadeUp {
@@ -502,6 +501,7 @@ footer {
   transform: translateY(20px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
+
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
@@ -702,13 +702,48 @@ footer {
   letter-spacing: 0.12em;
 }
 
+/*responsive*/
+/* ============================================
+   RESPONSIVE — COMPUTER (1024x600)
+   ============================================ */
+@media screen and (width: 1024px) and (height: 600px) {
+  /* only targets Nest Hub */
 
+.footer-links {
+  display: fixed;
+  gap: 2rem;
+  /* remove position: right */
+}
+
+#backToTop {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; /* sits above everything */
+}
+}
 
 /*responsive*/
 /* ============================================
    RESPONSIVE — TABLET (max 900px)
    ============================================ */
 @media (max-width: 900px) {
+
+  #backToTop{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text-box{
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.arrow{
+  opacity: 0;
+  pointer-events: none;
+}
 
   /* NAV */
   nav {
@@ -813,6 +848,22 @@ footer {
    RESPONSIVE — MOBILE (max 600px)
    ============================================ */
 @media (max-width: 600px) {
+
+  #backToTop{
+  opacity: 0;
+  pointer-events: none;
+}
+
+.text-box{
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.arrow{
+  opacity: 0;
+  pointer-events: none;
+}
 
   /* HIDE CURSOR on touch */
   .cursor, .cursor-ring { display: none; }
@@ -935,4 +986,49 @@ footer {
   object-fit: contain;
   display: block;
   pointer-events: none;
+}
+
+.text-box{
+  color: var(--muted);
+  border: 3.5px solid var(--border);
+  padding: 0.5rem 1.2rem;
+  font-weight: 350;
+  border-radius: 500px;
+  font-size: 30px;
+  letter-spacing: 0.03em;
+  z-index: 2;
+  text-decoration: none;
+    animation: fadeUp 2s;
+  position: absolute; /* or fixed */
+  top: 38.25em;
+  right: 3.25em;
+}
+
+#backToTop {
+  position: absolute;  /* pulls it out of the flex row */
+  left: 50%;
+    transform: translateX(-50%) translateY(-12px); /* adjust -5px as needed */
+  background: var(--black);
+  color: rgba(255, 255, 255, 0.604);
+  border: 2px solid var(--border);
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#backToTop.visible {
+  opacity: 1;
+}
+
+.arrow{
+  margin-top: 5px;
+}
+
+.cursor, .cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  will-change: transform; /* smoother rendering at all resolutions */
 }
