@@ -1000,8 +1000,8 @@ footer {
   text-decoration: none;
     animation: fadeUp 2s;
   position: absolute; /* or fixed */
-  top: 38.25em;
-  right: 3.25em;
+  bottom: 8%; /* relative to the section height instead of top-down */
+  right: 5rem; /* adjust as needed */
 }
 
 #backToTop {
@@ -1031,4 +1031,8 @@ footer {
   left: 0;
   pointer-events: none;
   will-change: transform; /* smoother rendering at all resolutions */
+}
+
+html {
+  scroll-snap-type: none; /* let JS handle it entirely */
 }

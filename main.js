@@ -61,3 +61,28 @@ document.getElementById('backToTop').addEventListener('click', () => {
 
 // Copy Email To Clipboard
 navigator.clipboard.writeText("erallianceinfo@gmail.com");
+
+// Page Scrolling 
+
+let isScrolling = false;
+
+window.addEventListener('wheel', (e) => {
+  e.preventDefault();
+
+  if (isScrolling) return;
+  isScrolling = true;
+
+  const direction = e.deltaY > 0 ? 1 : -1;
+  const sections = Array.from(document.querySelectorAll('section'));
+  const current = sections.findIndex(s => {
+    const rect = s.getBoundingClientRect();
+    return rect.top >= -10 && rect.top < window.innerHeight / 2;
+  });
+
+  const next = sections[current + direction];
+  if (next) {
+    next.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  setTimeout(() => { isScrolling = false; }, 800);
+}, { passive: false });
