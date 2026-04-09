@@ -13,6 +13,7 @@
   --border-mid: rgba(245, 244, 240, 0.2);
   --blue: rgb(0,110,225);
 }
+
 .section-index{
   
   font-weight: 400;
@@ -36,6 +37,10 @@ body {
 }
 
 /* CURSOR */
+* {
+  cursor: none !important;
+}
+
 .cursor {
   width: 8px;
   height: 8px;
@@ -45,8 +50,9 @@ body {
   top: 0; left: 0;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.15s ease;
+  will-change: transform;
 }
+
 .cursor-ring {
   width: 32px;
   height: 32px;
@@ -56,7 +62,7 @@ body {
   top: 0; left: 0;
   pointer-events: none;
   z-index: 9998;
-  transition: transform 0.08s ease, width 0.2s ease, height 0.2s ease;
+  will-change: transform;
 }
 
 /* NAV */
