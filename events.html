@@ -138,8 +138,12 @@
       letter-spacing: 0.05em; margin-bottom: 3rem;
     }
 
+    .meta-item:nth-child(2) {
+    min-width: 160px;
+    }
+
     .event-meta-bar {
-      display: grid; grid-template-columns: repeat(3, auto) 1fr;
+      display: grid; grid-template-columns: repeat(4, auto) 1fr;
       gap: 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
@@ -338,8 +342,18 @@
   </style>
 </head>
 <body>
-  <div class="cursor" id="cursor"></div>
-  <div class="cursor-ring" id="cursor-ring"></div>
+
+<style>
+  * { cursor: none !important; }
+
+.cursor, .cursor-ring {
+  will-change: transform;
+  transition: opacity 0.2s ease;
+}
+</style>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
 
   <nav>
     <a href="./index.html" class="logo">ERA</a>
@@ -357,7 +371,7 @@
     <p class="header-sub">Combat robotics competitions, qualifiers, and intercollegiate events.</p>
   </div>
 
-  EVENT 01 
+  <!-- EVENT 01 -->
   <div class="event-hero reveal">
     <div class="event-tag-row">
       <span class="event-tag upcoming">Registration Open</span>
@@ -372,6 +386,10 @@
         <div class="meta-value">May 15th, 2026</div>
       </div>
       <div class="meta-item">
+        <div class="meta-label">Countdown</div>
+         <div class="meta-value" id="demo"></div>
+      </div>
+      <div class="meta-item">
         <div class="meta-label">Time</div>
         <div class="meta-value">10:00 AM – 4:00 PM</div>
       </div>
@@ -379,12 +397,58 @@
         <div class="meta-label">Location</div>
         <div class="meta-value">De Anza College MLC<br><span style="font-weight:300;color:rgba(245,244,240,0.5);font-size:12px;">21250 Stevens Creek Blvd, Cupertino, CA</span></div>
       </div>
-      <div class="meta-item"></div>
+      <div class="meta-item" style="display:flex; flex-direction:column; justify-content:center; gap:1rem; border-right:none;">
+  <div>
+    <div class="meta-label"></div>
+    <div class="meta-value">
+      <span style="font-weight:300;color:rgba(245,244,240,0.5);font-size:12px;"></span>
     </div>
+  </div>
+<div class="meta-item" style="display:flex; align-items:flex-start; padding-top:1.4rem; margin-top:-1.5rem;">
+<a href="https://forms.gle/5mYkBPdYZXZhqce69" target="_blank" class="btn btn-blue">Sign Up →</a></div>
+    </div>
+    
+      <!-- COUNTDOWN TIMER -->
+ <!-- Display the countdown timer in an element -->
 
+<script>
+  var countDownDate = new Date("May 15, 2026 12:00:00").getTime();
+
+  function updateCountdown() {
+    var now = new Date().getTime();
+    var distance = countDownDate - now;
+
+    var days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    if (distance < 0) {
+      clearInterval(x);
+      document.getElementById("demo").innerHTML = "EXPIRED";
+      return;
+    }
+
+    document.getElementById("demo").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+  }
+
+  updateCountdown(); // ← fills the text BEFORE the fade starts
+  var x = setInterval(updateCountdown, 1000);
+</script>
+    </div>
+<!-- Google Maps -->
+ <div id="map-wrapper" style="position: relative; border: 1px solid var(--border-mid); overflow: hidden;">
+  <iframe
+    src="https://www.google.com/maps?q=37.320794593093865, -122.04809539858707&z=19&output=embed"
+    width="100%" height="450"
+    style="border: 3px solid var(--blue); display: block;"
+    loading="lazy">
+  </iframe>
+</div>
+<br><br><br>
     <div class="event-content">
 
-      LEFT COL: Schedule + Resources 
+      <!-- LEFT COL: Schedule + Resources --> 
       <div class="event-col">
         <p class="col-heading">Schedule</p>
         <div class="schedule-list">
@@ -406,22 +470,28 @@
           </div>
         </div>
 
-        <div class="resources-strip reveal" style="transition-delay:0.1s">
-          <p class="col-heading">Event Resources</p>
-          <div class="resource-links">
-            <a href="#" class="resource-link">
-              <span>Rules PDF</span>
-              <span class="resource-link-arrow">↗</span>
-            </a>
-            <a href="#" class="resource-link">
-              <span>Starter System PDF</span>
-              <span class="resource-link-arrow">↗</span>
-            </a>
-          </div>
-        </div>
+          <div class="resources-strip reveal" style="transition-delay:0.1s">
+  <p class="col-heading">Event Resources</p>
+  <div class="resource-cards">
+    <a href="#" class="resource-card" style="display:flex; flex-direction:column; padding:1.2rem; border:1px solid var(--border); text-decoration:none; color:var(--white);">
+      <span class="resource-card-label">Document</span>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="resource-card-title">Rules PDF</span>
+        <span class="resource-card-arrow" style="position:relative; top:-10px;">↗</span>
+      </div>
+    </a>
+    <a href="#" class="resource-card" style="display:flex; flex-direction:column; padding:1.2rem; border:1px solid var(--border); text-decoration:none; color:var(--white);">
+      <span class="resource-card-label">Document</span>
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span class="resource-card-title">Starter System PDF</span>
+        <span class="resource-card-arrow" style="position:relative; top:-10px;">↗</span>
+      </div>
+    </a>
+  </div>
+</div>
       </div>
 
-      RIGHT COL: Registration 
+      <!--RIGHT COL: Registration -->
       <div class="event-col reveal" style="transition-delay:0.15s">
         <p class="col-heading">Registration</p>
 

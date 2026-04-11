@@ -25,6 +25,16 @@ function animRing() {
 }
 animRing();
 
+cursor.style.opacity = '0';
+ring.style.opacity = '0';
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.opacity = '1';
+  ring.style.opacity = '1';
+  cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+}, { once: false });
+
 // Reveal on scroll
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver((entries) => {
@@ -59,9 +69,6 @@ if (contactForm) {
 document.getElementById('backToTop').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-
-// Copy Email To Clipboard
-navigator.clipboard.writeText("erallianceinfo@gmail.com");
 
 // Page Scrolling 
 

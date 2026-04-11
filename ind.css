@@ -161,7 +161,7 @@ section {
   animation: fadeUp 1s ease both 0.4s;
 }
 #hero h1 .dim { color: var(--blue)}
-#hero .hero-sub {
+#hero .hero-sub{
   position: relative;
   z-index: 2;
   font-size: 13px;
@@ -974,9 +974,6 @@ footer {
   .footer-links { flex-wrap: wrap; gap: 1rem; }
 }
 
-
- 
-
 #contact .contact-spline {
   display: flex;
   align-items: center;
@@ -995,6 +992,22 @@ footer {
 }
 
 .text-box{
+  color: var(--muted);
+  border: 3.5px solid var(--border);
+  padding: 0.5rem 1.2rem;
+  font-weight: 350;
+  border-radius: 500px;
+  font-size: 30px;
+  letter-spacing: 0.03em;
+  z-index: 2;
+  text-decoration: none;
+    animation: fadeUp 2s;
+  position: absolute; /* or fixed */
+  bottom: 8%; /* relative to the section height instead of top-down */
+  right: 5rem; /* adjust as needed */
+}
+
+.sign-up{
   color: var(--muted);
   border: 3.5px solid var(--border);
   padding: 0.5rem 1.2rem;
@@ -1042,3 +1055,31 @@ footer {
 html {
   scroll-snap-type: none; /* let JS handle it entirely */
 }
+
+  /* Event Resources Formatting */
+
+.resource-cards {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: 100%;
+}
+
+.resource-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem;
+  border: 1px solid var(--border);
+  text-decoration: none;
+  color: var(--white);
+  transition: border-color 0.2s;
+  width: fit-content;
+  min-width: 160px;
+}
+
+  .resource-card:hover { border-color: var(--border-mid); }
+  .resource-card-label { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; margin-bottom: 0.8rem; }
+  .resource-card-title { font-size: 14px; font-weight: 500; }
+  .resource-card-arrow { font-size: 11px; color: var(--muted); margin-top: 1rem; align-self: flex-end; }

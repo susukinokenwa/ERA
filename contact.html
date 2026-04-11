@@ -75,8 +75,26 @@
    
 </section>
     <link rel="stylesheet" href="./ind.css">
-    <script src="./main.js"></script>
 <style>
+
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--white); border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  will-change: transform;
+  transition: opacity 0.2s ease;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(245,244,240,0.4); border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  will-change: transform;
+  transition: opacity 0.2s ease;
+}
+* { cursor: none !important; }
+
    nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; justify-content: space-between; align-items: center;
@@ -130,5 +148,23 @@
   .footer-links { flex-wrap: wrap; gap: 1rem; }
 }
 </style>
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+  });
+
+  function animRing() {
+    rx += (mx - rx - 16) * 0.12;
+    ry += (my - ry - 16) * 0.12;
+    ring.style.transform = `translate(${rx}px, ${ry}px)`;
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+</script>
 </body>
 </html>
