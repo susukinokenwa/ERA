@@ -52,28 +52,28 @@ document.getElementById('backToTop').addEventListener('click', () => {
 
 // Page Scrolling 
 
-let isScrolling = false;
+// let isScrolling = false;
 
-window.addEventListener('wheel', (e) => {
-  e.preventDefault();
+// window.addEventListener('wheel', (e) => {
+//   e.preventDefault();
 
-  if (isScrolling) return;
-  isScrolling = true;
+//   if (isScrolling) return;
+//   isScrolling = true;
 
-  const direction = e.deltaY > 0 ? 1 : -1;
-  const sections = Array.from(document.querySelectorAll('section'));
-  const current = sections.findIndex(s => {
-    const rect = s.getBoundingClientRect();
-    return rect.top >= -10 && rect.top < window.innerHeight / 2;
-  });
+//   const direction = e.deltaY > 0 ? 1 : -1;
+//   const sections = Array.from(document.querySelectorAll('section'));
+//   const current = sections.findIndex(s => {
+//     const rect = s.getBoundingClientRect();
+//     return rect.top >= -10 && rect.top < window.innerHeight / 2;
+//   });
 
-  const next = sections[current + direction];
-  if (next) {
-    next.scrollIntoView({ behavior: 'smooth' });
-  }
+//   const next = sections[current + direction];
+//   if (next) {
+//     next.scrollIntoView({ behavior: 'smooth' });
+//   }
 
-  setTimeout(() => { isScrolling = false; }, 800);
-}, { passive: false });
+//   setTimeout(() => { isScrolling = false; }, 800);
+// }, { passive: false });
 
 
 
@@ -81,16 +81,17 @@ window.addEventListener('wheel', (e) => {
 const countdownMain = document.getElementById('countdown-main');
 if (countdownMain) {
   const target = new Date("May 15, 2026 10:00:00").getTime();
-  function updateMain() {
-    const now = new Date().getTime();
-    const dist = target - now;
-    if (dist < 0) { countdownMain.textContent = "Event Started"; return; }
-    const d = Math.floor(dist / 86400000);
-    const h = Math.floor((dist % 86400000) / 3600000);
-    const m = Math.floor((dist % 3600000) / 60000);
-    const s = Math.floor((dist % 60000) / 1000);
-    countdownMain.textContent = `${d}d ${h}h ${m}m ${s}s`;
-  }
-  updateMain();
-  setInterval(updateMain, 1000);
+    function updateMain() {
+      const now = new Date().getTime();
+      const dist = target - now;
+      if (dist == 0) { countdownMain.textContent = "Event Started"; return; }
+      else if(dist < 0) { countdownMain.textContent = "Event Ended"; return;}
+      const d = Math.floor(dist / 86400000);
+      const h = Math.floor((dist % 86400000) / 3600000);
+      const m = Math.floor((dist % 3600000) / 60000);
+      const s = Math.floor((dist % 60000) / 1000);
+      countdownMain.textContent = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    updateMain();
+    setInterval(updateMain, 1000);
 }
