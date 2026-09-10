@@ -95,3 +95,10 @@ if (countdownMain) {
     updateMain();
     setInterval(updateMain, 1000);
 }
+
+
+let startBtn = document.querySelector(".btnStart");
+let eventSection = document.querySelector("#explore");
+startBtn.addEventListener("click", () =>{
+  eventSection.scrollIntoView({behavior: 'smooth'});
+});
