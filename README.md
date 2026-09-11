@@ -10,5 +10,4 @@ competitions, and a cross-campus collaboration network—allowing clubs to achie
 significantly more together than independently. ERA is execution-focused, hands-on, and built to scale beyond a single campus or
 year.
 
-### website maded by Skyler Sun, Gavin Rossi
-###### ERA All Rights Reserved
+###### © ERA All Rights Reserved. Website maded by Skyler Sun, Gavin Rossi
